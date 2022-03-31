@@ -2,7 +2,7 @@
   // Classifier Variable
   let classifier;
   // Model URL
-  let imageModelURL = 'human-model/';
+  let imageModelURL = 'human-model/'; //사람 얼굴을 학습시킨 데이터
   
   // Video
   let video;
@@ -62,11 +62,13 @@
     label = results[0].label;
 
     siren_Audio = document.getElementById("sirensound");
+    music_Audio = document.getElementById("musicsound");
 
 
     if (label=="person") {
 
       if (siren_Audio.paused) {
+         music_Audio.pause();
          siren_Audio.currentTime = 0;
          siren_Audio.play();
       }
@@ -76,7 +78,11 @@
       <h3 style="color: red;">Human detected</h3>
       `;
 
-    } else {
+    }else{
+      if (music_Audio.paused) {
+        //music_Audio.currentTime = music_Audio.paused;
+        music_Audio.play();
+      }
     	document.getElementById("status").innerHTML = `<h3 style="color: #085129;"><i class="fa fa-check-square"></i></h3>
     	<h3 style="color: #085129;">Everything is OK</h3>`;
     }
